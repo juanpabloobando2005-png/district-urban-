@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>District Urban | Administrador</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#050505;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+.login{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:#0b0b0b;
+    border:1px solid #292929;
+    padding:30px;
+}
+
+.logo{
+    display:block;
+    width:130px;
+    max-height:100px;
+    object-fit:contain;
+    margin:0 auto 25px;
+}
+
+h1{
+    text-align:center;
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#777;
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    color:#999;
+    font-size:11px;
+    letter-spacing:1px;
+    margin-bottom:7px;
+}
+
+input,
+select{
+    width:100%;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    padding:13px;
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#fff;
+}
+
+.field{
+    margin-bottom:18px;
+}
+
+.btn{
+    border:0;
+    background:#fff;
+    color:#000;
+    padding:13px 18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn:hover{
+    opacity:.85;
+}
+
+.full{
+    width:100%;
+}
+
+.error{
+    color:#ff6b6b;
+    text-align:center;
+    margin-top:12px;
+    font-size:13px;
+}
+
+.app{
+    display:none;
+    min-height:100vh;
+    padding-bottom:60px;
+}
+
+header{
+    border-bottom:1px solid #222;
+    background:#080808;
+}
+
+.top{
+    width:min(1100px,92%);
+    margin:auto;
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:25px;
+}
+
+.panel{
+    background:#0b0b0b;
+    border:1px solid #292929;
+    padding:25px;
+}
+
+h2{
+    font-size:21px;
+    margin-bottom:22px;
+}
+
+.preview{
+    width:100%;
+    aspect-ratio:1/1;
+    background:#111;
+    border:1px dashed #444;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin-top:10px;
+    margin-bottom:15px;
+}
+
+.preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.preview-text{
+    color:#666;
+    font-size:13px;
+}
+
+.message{
+    color:#777;
+    font-size:12px;
+    margin-top:10px;
+}
+
+.products{
+    margin-top:25px;
+}
+
+.product{
+    display:grid;
+    grid-template-columns:80px 1fr auto;
+    gap:15px;
+    align-items:center;
+    background:#101010;
+    border:1px solid #252525;
+    padding:12px;
+    margin-bottom:10px;
+}
+
+.product img{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    background:#111;
+}
+
+.product-name{
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.product-info{
+    color:#888;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.dark{
+    background:#151515;
+    color:#fff;
+    border:1px solid #333;
+}
+
+.danger{
+    background:#8d0000;
+    color:#fff;
+}
+
+.hidden{
+    display:none;
+}
+
+.info{
+    color:#777;
+    font-size:12px;
+    line-height:1.6;
+    margin-bottom:18px;
+}
+
+@media(max-width:750px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .product{
+        grid-template-columns:65px 1fr;
+    }
+
+    .product img{
+        width:65px;
+        height:65px;
+    }
+
+    .actions{
+        grid-column:1/-1;
+    }
+
+    .top{
+        gap:10px;
+    }
+
+    .brand{
+        font-size:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- LOGIN -->
+
+<section class="login" id="loginScreen">
+
+<div class="login-box">
+
+<img
+src="logo.jpg"
+class="logo"
+alt="District Urban"
+>
+
+<h1>
+ADMINISTRADOR
+</h1>
+
+<p class="subtitle">
+DISTRICT URBAN
+</p>
+
+
+<div class="field">
+
+<label>
+CORREO
+</label>
+
+<input
+id="email"
+type="email"
+placeholder="Correo"
+autocomplete="username"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+CONTRASEÑA
+</label>
+
+<input
+id="password"
+type="password"
+placeholder="Contraseña"
+autocomplete="current-password"
+>
+
+</div>
+
+
+<button
+class="btn full"
+id="loginButton"
+>
+ENTRAR
+</button>
+
+
+<div
+class="error"
+id="loginError"
+></div>
+
+</div>
+
+</section>
+
+
+
+<!-- ADMIN -->
+
+<section
+class="app"
+id="adminApp"
+>
+
+
+<header>
+
+<div class="top">
+
+<div class="brand">
+DISTRICT URBAN · ADMIN
+</div>
+
+
+<button
+class="btn dark"
+id="logoutButton"
+>
+CERRAR SESIÓN
+</button>
+
+</div>
+
+</header>
+
+
+
+<main class="container">
+
+
+<div class="grid">
+
+
+<!-- INFORMACIÓN -->
+
+<section class="panel">
+
+<h2>
+INFORMACIÓN DE LA TIENDA
+</h2>
+
+
+<div class="field">
+
+<label>
+DIRECCIÓN
+</label>
+
+<input
+id="address"
+placeholder="Ibagué, Tolima"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+HORARIO
+</label>
+
+<input
+id="hours"
+placeholder="Lunes a sábado · 9:00 AM - 7:00 PM"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+WHATSAPP
+</label>
+
+<input
+id="whatsapp"
+placeholder="573001234567"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+INSTAGRAM
+</label>
+
+<input
+id="instagram"
+placeholder="https://instagram.com/districturban.co"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+FACEBOOK
+</label>
+
+<input
+id="facebook"
+placeholder="https://facebook.com/"
+>
+
+</div>
+
+
+<button
+class="btn full"
+id="saveStore"
+>
+GUARDAR INFORMACIÓN
+</button>
+
+
+<div
+class="message"
+id="storeMessage"
+></div>
+
+</section>
+
+
+
+<!-- PRODUCTO -->
+
+<section class="panel">
+
+<h2 id="productTitle">
+AGREGAR PRODUCTO
+</h2>
+
+
+<input
+type="hidden"
+id="editingId"
+>
+
+
+<div class="field">
+
+<label>
+NOMBRE DEL PRODUCTO
+</label>
+
+<input
+id="productName"
+placeholder="Ej: Nike Air Max"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+CATEGORÍA
+</label>
+
+<select id="productCategory">
+
+<option value="zapatillas">
+Zapatillas
+</option>
+
+<option value="jeans">
+Jeans
+</option>
+
+<option value="ropa">
+Ropa
+</option>
+
+<option value="gorras">
+Gorras
+</option>
+
+<option value="accesorios">
+Accesorios
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+PRECIO
+</label>
+
+<input
+id="productPrice"
+type="number"
+placeholder="140000"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+TALLAS
+</label>
+
+<input
+id="productSizes"
+placeholder="38, 39, 40, 41"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+📸 FOTO DEL PRODUCTO
+</label>
+
+<input
+id="productImage"
+type="file"
+accept="image/*"
+>
+
+</div>
+
+
+<div
+class="preview"
+id="preview"
+>
+
+<span class="preview-text">
+Aquí aparecerá la foto
+</span>
+
+</div>
+
+
+<button
+class="btn full"
+id="saveProduct"
+>
+AGREGAR PRODUCTO
+</button>
+
+
+<button
+class="btn dark full hidden"
+id="cancelEdit"
+style="margin-top:10px"
+>
+CANCELAR EDICIÓN
+</button>
+
+
+<p class="info" style="margin-top:15px">
+
+Ahora solo tienes que tocar
+“📸 Foto del producto” y escoger
+la imagen directamente desde tu dispositivo.
+
+</p>
+
+</section>
+
+</div>
+
+
+
+<!-- PRODUCTOS -->
+
+<section class="panel products">
+
+<h2>
+MIS PRODUCTOS
+</h2>
+
+
+<div id="productList"></div>
+
+</section>
+
+
+</main>
+
+</section>
+
+
+
+<script>
+
+const STORE_KEY =
+"districtUrbanStore";
+
+
+const ADMIN_EMAIL =
+"juanpabloobando2005@gmail.com";
+
+
+const ADMIN_PASSWORD =
+"juan2005";
+
+
+let store = {
+
+address:"Ibagué, Tolima",
+
+hours:"Lunes a sábado · 9:00 AM - 7:00 PM",
+
+whatsapp:"",
+
+instagram:
+"https://instagram.com/districturban.co",
+
+facebook:"",
+
+products:[]
+
+};
+
+
+let selectedImage = "";
+
+
+/* ==========================
+CARGAR INFORMACIÓN
+========================== */
+
+function loadStore(){
+
+try{
+
+const saved =
+localStorage.getItem(
+STORE_KEY
+);
+
+if(saved){
+
+store = {
+
+...store,
+
+...JSON.parse(saved)
+
+};
+
+}
+
+}catch(error){
+
+console.error(error);
+
+}
+
+
+document
+.getElementById("address")
+.value =
+store.address || "";
+
+
+document
+.getElementById("hours")
+.value =
+store.hours || "";
+
+
+document
+.getElementById("whatsapp")
+.value =
+store.whatsapp || "";
+
+
+document
+.getElementById("instagram")
+.value =
+store.instagram || "";
+
+
+document
+.getElementById("facebook")
+.value =
+store.facebook || "";
+
+
+renderProducts();
+
+}
+
+
+/* ==========================
+GUARDAR
+========================== */
+
+function saveStore(){
+
+store.address =
+document
+.getElementById("address")
+.value
+.trim();
+
+
+store.hours =
+document
+.getElementById("hours")
+.value
+.trim();
+
+
+store.whatsapp =
+document
+.getElementById("whatsapp")
+.value
+.trim();
+
+
+store.instagram =
+document
+.getElementById("instagram")
+.value
+.trim();
+
+
+store.facebook =
+document
+.getElementById("facebook")
+.value
+.trim();
+
+
+saveData();
+
+
+document
+.getElementById("storeMessage")
+.textContent =
+"✓ Información guardada.";
+
+}
+
+
+/* ==========================
+GUARDAR DATOS
+========================== */
+
+function saveData(){
+
+localStorage.setItem(
+
+STORE_KEY,
+
+JSON.stringify(store)
+
+);
+
+}
+
+
+/* ==========================
+LOGIN
+========================== */
+
+function login(){
+
+const email =
+document
+.getElementById("email")
+.value
+.trim();
+
+
+const password =
+document
+.getElementById("password")
+.value;
+
+
+if(
+
+email === ADMIN_EMAIL &&
+
+password === ADMIN_PASSWORD
+
+){
+
+sessionStorage.setItem(
+"districtUrbanLogin",
+"true"
+);
+
+
+document
+.getElementById("loginScreen")
+.style
+.display =
+"none";
+
+
+document
+.getElementById("adminApp")
+.style
+.display =
+"block";
+
+
+loadStore();
+
+}else{
+
+document
+.getElementById("loginError")
+.textContent =
+"Correo o contraseña incorrectos.";
+
+}
+
+}
+
+
+/* ==========================
+LOGOUT
+========================== */
+
+function logout(){
+
+sessionStorage.removeItem(
+"districtUrbanLogin"
+);
+
+location.reload();
+
+}
+
+
+/* ==========================
+SUBIR IMAGEN
+========================== */
+
+document
+.getElementById("productImage")
+.addEventListener(
+"change",
+function(){
+
+const file =
+this.files[0];
+
+
+if(!file){
+
+return;
+
+}
+
+
+if(!file.type.startsWith("image/")){
+
+alert(
+"Selecciona una imagen válida."
+);
+
+this.value="";
+
+return;
+
+}
+
+
+if(file.size > 5 * 1024 * 1024){
+
+alert(
+"La imagen pesa más de 5 MB. Elige una más liviana."
+);
+
+this.value="";
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(event){
+
+selectedImage =
+event.target.result;
+
+
+document
+.getElementById("preview")
+.innerHTML =
+
+`<img
+src="${selectedImage}"
+alt="Vista previa"
+>`;
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+
+/* ==========================
+AGREGAR PRODUCTO
+========================== */
+
+function saveProduct(){
+
+const name =
+document
+.getElementById("productName")
+.value
+.trim();
+
+
+const category =
+document
+.getElementById("productCategory")
+.value;
+
+
+const price =
+Number(
+document
+.getElementById("productPrice")
+.value
+);
+
+
+const sizes =
+document
+.getElementById("productSizes")
+.value
+.trim();
+
+
+const editingId =
+document
+.getElementById("editingId")
+.value;
+
+
+if(!name){
+
+alert(
+"Escribe el nombre del producto."
+);
+
+return;
+
+}
+
+
+if(!price){
+
+alert(
+"Escribe el precio."
+);
+
+return;
+
+}
+
+
+/* EDITAR */
+
+if(editingId){
+
+const product =
+store.products.find(
+
+p =>
+String(p.id) ===
+String(editingId)
+
+);
+
+
+if(product){
+
+product.name =
+name;
+
+product.category =
+category;
+
+product.price =
+price;
+
+product.sizes =
+sizes;
+
+
+if(selectedImage){
+
+product.image =
+selectedImage;
+
+}
+
+}
+
+}
+
+
+/* NUEVO */
+
+else{
+
+store.products.push({
+
+id:Date.now(),
+
+name:name,
+
+category:category,
+
+price:price,
+
+sizes:sizes,
+
+image:
+selectedImage ||
+"logo.jpg"
+
+});
+
+}
+
+
+saveData();
+
+renderProducts();
+
+clearForm();
+
+}
+
+
+/* ==========================
+MOSTRAR PRODUCTOS
+========================== */
+
+function renderProducts(){
+
+const list =
+document
+.getElementById("productList");
+
+
+if(!store.products.length){
+
+list.innerHTML = `
+
+<p class="info">
+
+Todavía no tienes productos.
+Agrega el primero desde arriba.
+
+</p>
+
+`;
+
+return;
+
+}
+
+
+list.innerHTML =
+store.products
+.map(product=>`
+
+<div class="product">
+
+
+<img
+
+src="${
+product.image ||
+"logo.jpg"
+}"
+
+alt="${escapeHTML(
+product.name
+)}"
+
+onerror="this.src='logo.jpg'"
+
+>
+
+
+<div>
+
+<div class="product-name">
+
+${escapeHTML(
+product.name
+)}
+
+</div>
+
+
+<div class="product-info">
+
+Categoría:
+${escapeHTML(
+product.category
+)}
+
+<br>
+
+Precio:
+$${Number(
+product.price || 0
+).toLocaleString(
+"es-CO"
+)}
+
+<br>
+
+Tallas:
+${escapeHTML(
+product.sizes ||
+"Sin tallas"
+)}
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+
+class="btn dark"
+
+onclick="
+editProduct(${product.id})
+"
+
+>
+
+EDITAR
+
+</button>
+
+
+<button
+
+class="btn danger"
+
+onclick="
+deleteProduct(${product.id})
+"
+
+>
+
+ELIMINAR
+
+</button>
+
+</div>
+
+
+</div>
+
+`)
+.join("");
+
+}
+
+
+/* ==========================
+EDITAR
+========================== */
+
+function editProduct(id){
+
+const product =
+store.products.find(
+
+p =>
+Number(p.id) ===
+Number(id)
+
+);
+
+
+if(!product){
+
+return;
+
+}
+
+
+document
+.getElementById("editingId")
+.value =
+product.id;
+
+
+document
+.getElementById("productName")
+.value =
+product.name;
+
+
+document
+.getElementById("productCategory")
+.value =
+product.category;
+
+
+document
+.getElementById("productPrice")
+.value =
+product.price;
+
+
+document
+.getElementById("productSizes")
+.value =
+product.sizes;
+
+
+selectedImage = "";
+
+
+if(product.image){
+
+document
+.getElementById("preview")
+.innerHTML =
+
+`<img
+src="${product.image}"
+alt="Producto"
+>`;
+
+}
+
+
+document
+.getElementById("productTitle")
+.textContent =
+"EDITAR PRODUCTO";
+
+
+document
+.getElementById("saveProduct")
+.textContent =
+"GUARDAR CAMBIOS";
+
+
+document
+.getElementById("cancelEdit")
+.classList
+.remove("hidden");
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}
+
+
+/* ==========================
+ELIMINAR
+========================== */
+
+function deleteProduct(id){
+
+const product =
+store.products.find(
+
+p =>
+Number(p.id) ===
+Number(id)
+
+);
+
+
+if(!product){
+
+return;
+
+}
+
+
+const confirmDelete =
+confirm(
+
+"¿Quieres eliminar " +
+product.name +
+"?"
+
+);
+
+
+if(!confirmDelete){
+
+return;
+
+}
+
+
+store.products =
+store.products.filter(
+
+p =>
+Number(p.id) !==
+Number(id)
+
+);
+
+
+saveData();
+
+renderProducts();
+
+}
+
+
+/* ==========================
+LIMPIAR
+========================== */
+
+function clearForm(){
+
+document
+.getElementById("editingId")
+.value = "";
+
+
+document
+.getElementById("productName")
+.value = "";
+
+
+document
+.getElementById("productPrice")
+.value = "";
+
+
+document
+.getElementById("productSizes")
+.value = "";
+
+
+document
+.getElementById("productImage")
+.value = "";
+
+
+selectedImage = "";
+
+
+document
+.getElementById("preview")
+.innerHTML =
+
+`<span class="preview-text">
+Aquí aparecerá la foto
+</span>`;
+
+
+document
+.getElementById("productTitle")
+.textContent =
+"AGREGAR PRODUCTO";
+
+
+document
+.getElementById("saveProduct")
+.textContent =
+"AGREGAR PRODUCTO";
+
+
+document
+.getElementById("cancelEdit")
+.classList
+.add("hidden");
+
+}
+
+
+/* ==========================
+ESCAPAR HTML
+========================== */
+
+function escapeHTML(value){
+
+return String(value || "")
+
+.replaceAll("&","&amp;")
+
+.replaceAll("<","&lt;")
+
+.replaceAll(">","&gt;")
+
+.replaceAll('"',"&quot;")
+
+.replaceAll("'","&#039;");
+
+}
+
+
+/* ==========================
+BOTONES
+========================== */
+
+document
+.getElementById("loginButton")
+.addEventListener(
+"click",
+login
+);
+
+
+document
+.getElementById("logoutButton")
+.addEventListener(
+"click",
+logout
+);
+
+
+document
+.getElementById("saveStore")
+.addEventListener(
+"click",
+saveStore
+);
+
+
+document
+.getElementById("saveProduct")
+.addEventListener(
+"click",
+saveProduct
+);
+
+
+document
+.getElementById("cancelEdit")
+.addEventListener(
+"click",
+clearForm
+);
+
+
+/* ENTER LOGIN */
+
+document
+.getElementById("password")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Enter"){
+
+login();
+
+}
+
+});
+
+
+/* ==========================
+INICIAR SESIÓN AUTOMÁTICA
+========================== */
+
+if(
+sessionStorage.getItem(
+"districtUrbanLogin"
+) === "true"
+){
+
+document
+.getElementById("loginScreen")
+.style
+.display =
+"none";
+
+
+document
+.getElementById("adminApp")
+.style
+.display =
+"block";
+
+
+loadStore();
+
+}
+
+</script>
+
+</body>
+</html>
